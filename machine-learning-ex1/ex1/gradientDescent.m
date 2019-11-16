@@ -29,6 +29,7 @@ for iter = 1:num_iters
 
     #これがベクトル化されたもの
     #theta = theta - (alpha/m) .* (X' * (X * theta - y)); #'
+    # これらの結果は正しい。
     #Theta found by gradient descent:
     #-3.630291
     #1.166362
@@ -47,20 +48,21 @@ for iter = 1:num_iters
     #-3.630291
     #1.166362
 
-    #これは自分でやり遂げた！
+    # ２番めの試み
     #theta(1,1) = theta(1,1) - rate * sum( ((X*theta)-y).*X(:,1) );
     #theta(2,1) = theta(2,1) - rate * sum( ((X*theta)-y).*X(:,2) );
 
+    # 3番目の試み
     #theta(1,1) = theta(1,1) - (alpha * (1/m)) * sum( ((X*theta)-y).*X(:,1) );
     #theta(2,1) = theta(2,1) - (alpha * (1/m)) * sum( ((X*theta)-y).*X(:,2) );
+    # 上記両方とも間違っている。
     #Theta found by gradient descent:
     #-3.636063
     #1.166989
 
-    theta1 = theta(1) - alpha * (1 / m) * sum(((X * theta) - y) .* X(:, 1));
-    theta2 = theta(2) - alpha * (1 / m) * sum(((X * theta) - y) .* X(:, 2));
-    #theta(1) = theta1
-    #theta(2) = theta2
+    # 訂正バージョン
+    theta1 = theta(1,1) - rate * sum( ((X*theta)-y).*X(:,1) );
+    theta2 = theta(2,1) - rate * sum( ((X*theta)-y).*X(:,2) );
     theta = [theta1; theta2];
     # ＝＞まじかよ？　望んでいた値になった。なんで？
     #＝＞あ、theta2の式で、更新されたtheta1の値が使われてしまってるからか！！

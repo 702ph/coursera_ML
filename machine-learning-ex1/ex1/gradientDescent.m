@@ -69,15 +69,6 @@ for iter = 1:num_iters
     #-3.630291
     #1.166362
 
-
-    #これはニコのスライド
-    #diff = theta - y; #やり方が違う！！　ニコはthetaをｙと同じ数を準備してる。。。。？と、思う。。。
-    # ＝＞そもそもこのやり方だとThetaをそれぞれのXjに対して準備してることにならないか？？？
-    # それだと究極のオーバーフィッティングではないか？？
-    #delta_theta = X'*diff #';
-    #delta_theta_dash = delta_theta * (alpha/m);
-    #theta = theta -delta_theta_dash;
-
     % ============================================================
 
     % Save the cost J in every iteration

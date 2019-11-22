@@ -53,17 +53,24 @@ X = [ones(m, 1) X];
 %                 initial_theta, options);
 %
 
+iterations = 5000;
+for label = 1:num_labels
+#for label = 1:1 #debug用。ループ１回
+  theta = ones(n+1,1);
+  y_binarized = (y==label);
 
-for label = 1:num_labels #label == classである。
-  initial_theta = zeros(n + 1, 1);
-  options = optimset('GradObj', 'on', 'MaxIter', 50);
+  for iteration = 1:iterations
+  theta_for_grad = [0; theta(2:end,:)];
+  grad =  (lambda/m)*theta_for_grad + (1/m) * X' * (sigmoid(X*theta)-y_binarized);
+  theta = theta - grad;
+  end
 
-  all_theta(label,:) =  fmincg (@(t)(lrCostFunction(t, X, (y == label), lambda)), ...
-                   initial_theta, options);
-end
+  all_theta(label,:) = theta'; #'
+end #'
 
-#disp("debug")
-#all_theta
+
+disp("debug: all_theta")
+all_theta
 
 % =========================================================================
 

@@ -27,7 +27,7 @@ clear ; close all; clc
 %
 fprintf('Visualizing example dataset for PCA.\n\n');
 
-%  The following command loads the dataset. You should now have the 
+%  The following command loads the dataset. You should now have the
 %  variable X in your environment
 load ('ex7data1.mat');
 
@@ -35,8 +35,8 @@ load ('ex7data1.mat');
 plot(X(:, 1), X(:, 2), 'bo');
 axis([0.5 6.5 2 8]); axis square;
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part 1: Program paused. Press enter to continue.\n');
+#pause;
 
 
 %% =============== Part 2: Principal Component Analysis ===============
@@ -49,7 +49,7 @@ fprintf('\nRunning PCA on example dataset.\n\n');
 [X_norm, mu, sigma] = featureNormalize(X);
 
 %  Run PCA
-[U, S] = pca(X_norm);
+[U, S] = pca(X_norm)
 
 %  Compute mu, the mean of the each feature
 
@@ -64,14 +64,14 @@ fprintf('Top eigenvector: \n');
 fprintf(' U(:,1) = %f %f \n', U(1,1), U(2,1));
 fprintf('\n(you should expect to see -0.707107 -0.707107)\n');
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part 2: Program paused. Press enter to continue.\n');
+#pause;
 
 
 %% =================== Part 3: Dimension Reduction ===================
-%  You should now implement the projection step to map the data onto the 
-%  first k eigenvectors. The code will then plot the data in this reduced 
-%  dimensional space.  This will show you what the data looks like when 
+%  You should now implement the projection step to map the data onto the
+%  first k eigenvectors. The code will then plot the data in this reduced
+%  dimensional space.  This will show you what the data looks like when
 %  using only the corresponding eigenvectors to reconstruct it.
 %
 %  You should complete the code in projectData.m
@@ -100,8 +100,9 @@ for i = 1:size(X_norm, 1)
 end
 hold off
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part 3: Program paused. Press enter to continue.\n');
+#pause;
+
 
 %% =============== Part 4: Loading and Visualizing Face Data =============
 %  We start the exercise by first loading and visualizing the dataset.
@@ -111,12 +112,14 @@ fprintf('\nLoading face dataset.\n\n');
 
 %  Load Face dataset
 load ('ex7faces.mat')
+size(X)
 
 %  Display the first 100 faces in the dataset
 displayData(X(1:100, :));
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part 4: Program paused. Press enter to continue.\n');
+#pause;
+
 
 %% =========== Part 5: PCA on Face Data: Eigenfaces  ===================
 %  Run PCA and visualize the eigenvectors which are in this case eigenfaces
@@ -125,7 +128,7 @@ pause;
 fprintf(['\nRunning PCA on face dataset.\n' ...
          '(this might take a minute or two ...)\n\n']);
 
-%  Before running PCA, it is important to first normalize X by subtracting 
+%  Before running PCA, it is important to first normalize X by subtracting
 %  the mean value from each feature
 [X_norm, mu, sigma] = featureNormalize(X);
 
@@ -135,13 +138,13 @@ fprintf(['\nRunning PCA on face dataset.\n' ...
 %  Visualize the top 36 eigenvectors found
 displayData(U(:, 1:36)');
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part5: Program paused. Press enter to continue.\n');
+#pause; #'
 
 
 %% ============= Part 6: Dimension Reduction for Faces =================
-%  Project images to the eigen space using the top k eigenvectors 
-%  If you are applying a machine learning algorithm 
+%  Project images to the eigen space using the top k eigenvectors
+%  If you are applying a machine learning algorithm
 fprintf('\nDimension reduction for face dataset.\n\n');
 
 K = 100;
@@ -150,11 +153,11 @@ Z = projectData(X_norm, U, K);
 fprintf('The projected data Z has a size of: ')
 fprintf('%d ', size(Z));
 
-fprintf('\n\nProgram paused. Press enter to continue.\n');
-pause;
+fprintf('\n\n Part5: Program paused. Press enter to continue.\n');
+#pause;
 
 %% ==== Part 7: Visualization of Faces after PCA Dimension Reduction ====
-%  Project images to the eigen space using the top K eigen vectors and 
+%  Project images to the eigen space using the top K eigen vectors and
 %  visualize only using those K dimensions
 %  Compare to the original input, which is also displayed
 
@@ -175,13 +178,13 @@ displayData(X_rec(1:100,:));
 title('Recovered faces');
 axis square;
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part7: Program paused. Press enter to continue.\n');
+#pause;
 
 
 %% === Part 8(a): Optional (ungraded) Exercise: PCA for Visualization ===
 %  One useful application of PCA is to use it to visualize high-dimensional
-%  data. In the last K-Means exercise you ran K-Means on 3-dimensional 
+%  data. In the last K-Means exercise you ran K-Means on 3-dimensional
 %  pixel colors of an image. We first visualize this output in 3D, and then
 %  apply PCA to obtain a visualization in 2D.
 
@@ -197,7 +200,7 @@ A = double(imread('bird_small.png'));
 A = A / 255;
 img_size = size(A);
 X = reshape(A, img_size(1) * img_size(2), 3);
-K = 16; 
+K = 16;
 max_iters = 10;
 initial_centroids = kMeansInitCentroids(X, K);
 [centroids, idx] = runkMeans(X, initial_centroids, max_iters);
@@ -214,8 +217,8 @@ colors = palette(idx(sel), :);
 figure;
 scatter3(X(sel, 1), X(sel, 2), X(sel, 3), 10, colors);
 title('Pixel dataset plotted in 3D. Color shows centroid memberships');
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part 8(A): Program paused. Press enter to continue.\n');
+#pause;
 
 %% === Part 8(b): Optional (ungraded) Exercise: PCA for Visualization ===
 % Use PCA to project this cloud to 2D for visualization
@@ -231,5 +234,5 @@ Z = projectData(X_norm, U, 2);
 figure;
 plotDataPoints(Z(sel, :), idx(sel), K);
 title('Pixel dataset plotted in 2D, using PCA for dimensionality reduction');
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part8(B): Program paused. Press enter to continue.\n');
+#pause;

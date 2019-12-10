@@ -22,9 +22,9 @@
 clear ; close all; clc
 
 %% ================= Part 1: Find Closest Centroids ====================
-%  To help you implement K-Means, we have divided the learning algorithm 
+%  To help you implement K-Means, we have divided the learning algorithm
 %  into two functions -- findClosestCentroids and computeCentroids. In this
-%  part, you should complete the code in the findClosestCentroids function. 
+%  part, you should complete the code in the findClosestCentroids function.
 %
 fprintf('Finding closest centroids.\n\n');
 
@@ -43,8 +43,8 @@ fprintf('Closest centroids for the first 3 examples: \n')
 fprintf(' %d', idx(1:3));
 fprintf('\n(the closest centroids should be 1, 3, 2 respectively)\n');
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part 1: Program paused. Press enter to continue.\n');
+#pause;
 
 %% ===================== Part 2: Compute Means =========================
 %  After implementing the closest centroids function, you should now
@@ -62,15 +62,15 @@ fprintf('   [ 2.428301 3.157924 ]\n');
 fprintf('   [ 5.813503 2.633656 ]\n');
 fprintf('   [ 7.119387 3.616684 ]\n\n');
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part2: Program paused. Press enter to continue.\n');
+#pause; #'
 
 
 %% =================== Part 3: K-Means Clustering ======================
 %  After you have completed the two functions computeCentroids and
 %  findClosestCentroids, you have all the necessary pieces to run the
 %  kMeans algorithm. In this part, you will run the K-Means algorithm on
-%  the example dataset we have provided. 
+%  the example dataset we have provided.
 %
 fprintf('\nRunning K-Means clustering on example dataset.\n\n');
 
@@ -92,14 +92,14 @@ initial_centroids = [3 3; 6 2; 8 5];
 [centroids, idx] = runkMeans(X, initial_centroids, max_iters, true);
 fprintf('\nK-Means Done.\n\n');
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part3: Program paused. Press enter to continue.\n');
+#pause;
 
 %% ============= Part 4: K-Means Clustering on Pixels ===============
 %  In this exercise, you will use K-Means to compress an image. To do this,
 %  you will first run K-Means on the colors of the pixels in the image and
 %  then you will map each pixel onto its closest centroid.
-%  
+%
 %  You should now complete the code in kMeansInitCentroids.m
 %
 
@@ -123,25 +123,25 @@ X = reshape(A, img_size(1) * img_size(2), 3);
 
 % Run your K-Means algorithm on this data
 % You should try different values of K and max_iters here
-K = 16; 
+K = 16;
 max_iters = 10;
 
 % When using K-Means, it is important the initialize the centroids
-% randomly. 
+% randomly.
 % You should complete the code in kMeansInitCentroids.m before proceeding
 initial_centroids = kMeansInitCentroids(X, K);
 
 % Run K-Means
 [centroids, idx] = runkMeans(X, initial_centroids, max_iters);
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+fprintf('Part4: Program paused. Press enter to continue.\n');
+#pause;
 
 
 %% ================= Part 5: Image Compression ======================
 %  In this part of the exercise, you will use the clusters of K-Means to
 %  compress an image. To do this, we first find the closest clusters for
-%  each example. After that, we 
+%  each example. After that, we
 
 fprintf('\nApplying K-Means to compress an image.\n\n');
 
@@ -149,7 +149,7 @@ fprintf('\nApplying K-Means to compress an image.\n\n');
 idx = findClosestCentroids(X, centroids);
 
 % Essentially, now we have represented the image X as in terms of the
-% indices in idx. 
+% indices in idx.
 
 % We can now recover the image from the indices (idx) by mapping each pixel
 % (specified by its index in idx) to the centroid value
@@ -158,9 +158,9 @@ X_recovered = centroids(idx,:);
 % Reshape the recovered image into proper dimensions
 X_recovered = reshape(X_recovered, img_size(1), img_size(2), 3);
 
-% Display the original image 
+% Display the original image
 subplot(1, 2, 1);
-imagesc(A); 
+imagesc(A);
 title('Original');
 
 % Display compressed image side by side
@@ -169,6 +169,5 @@ imagesc(X_recovered)
 title(sprintf('Compressed, with %d colors.', K));
 
 
-fprintf('Program paused. Press enter to continue.\n');
+fprintf('Part5: Program paused. Press enter to continue.\n');
 pause;
-
